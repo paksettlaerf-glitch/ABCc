@@ -1,0 +1,19 @@
+local Admins = {
+    [123456789] = true -- เปลี่ยนเป็น UserId ของคุณ
+}
+
+local ServerStorage = game:GetService("ServerStorage")
+local Players = game:GetService("Players")
+
+Players.PlayerAdded:Connect(function(player)
+    player.Chatted:Connect(function(msg)
+        if not Admins[player.UserId] then return end
+
+        if msg == "/ESP" then
+            local gun = ServerStorage:FindFirstChild("อี่โบ็ะ") -- เปลี่ยนเป็นชื่อ Tool ของคุณ
+            if gun then
+                gun:Clone().Parent = player.Backpack
+            end
+        end
+    end)
+end)
